@@ -19,7 +19,7 @@ namespace LeerExcel
 
         private void ReporteHoja_Load(object sender, EventArgs e)
         {
-            DataSet1.EnforceConstraints = false;
+            
             // TODO: esta línea de código carga datos en la tabla 'dataSet1.DataTable' Puede moverla o quitarla según sea necesario.
             this.dataTableTableAdapter.getHojasVentana(this.dataSet1.DataTable);
 

@@ -114,7 +114,7 @@ namespace LeerExcel
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al conectar con la base de datos");
+                MessageBox.Show("Error al conectar con la base de datos"+ex);
             }
 
             string sql = "SELECT COUNT(NO_ORDEN) FROM ordenes WHERE NO_ORDEN = '" + no_orden + "'";
