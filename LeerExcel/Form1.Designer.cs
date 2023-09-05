@@ -1,6 +1,6 @@
 ﻿namespace LeerExcel
 {
-    partial class frmEtiquetas
+    partial class   frmEtiquetas
     {
         /// <summary>
         /// Variable del diseñador necesaria.
@@ -36,9 +36,7 @@
             this.lblRuta = new System.Windows.Forms.Label();
             this.btnCargar = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.btnEjecutarEM = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtNumOrden = new System.Windows.Forms.TextBox();
+            this.btnAbrirReporte = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.btnEjecutarEH = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -47,13 +45,11 @@
             this.btnEjecutarEO = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.dataSet11 = new LeerExcel.DataSet1();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataSet11)).BeginInit();
             this.SuspendLayout();
             // 
             // openFileDialog1
@@ -80,6 +76,7 @@
             this.tabPage1.Controls.Add(this.bntBuscar);
             this.tabPage1.Controls.Add(this.lblRuta);
             this.tabPage1.Controls.Add(this.btnCargar);
+            this.tabPage1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -90,14 +87,15 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(94, 156);
+            this.progressBar1.Location = new System.Drawing.Point(83, 156);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(500, 23);
+            this.progressBar1.Size = new System.Drawing.Size(511, 23);
             this.progressBar1.TabIndex = 7;
             // 
             // bntBuscar
             // 
-            this.bntBuscar.Location = new System.Drawing.Point(362, 108);
+            this.bntBuscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bntBuscar.Location = new System.Drawing.Point(396, 101);
             this.bntBuscar.Name = "bntBuscar";
             this.bntBuscar.Size = new System.Drawing.Size(48, 30);
             this.bntBuscar.TabIndex = 6;
@@ -108,19 +106,21 @@
             // lblRuta
             // 
             this.lblRuta.AutoSize = true;
-            this.lblRuta.Location = new System.Drawing.Point(91, 117);
+            this.lblRuta.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRuta.Location = new System.Drawing.Point(79, 106);
             this.lblRuta.Name = "lblRuta";
-            this.lblRuta.Size = new System.Drawing.Size(113, 13);
+            this.lblRuta.Size = new System.Drawing.Size(127, 15);
             this.lblRuta.TabIndex = 5;
             this.lblRuta.Text = "Selecciona un archivo";
+            this.lblRuta.Click += new System.EventHandler(this.lblRuta_Click);
             // 
             // btnCargar
             // 
             this.btnCargar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnCargar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCargar.Location = new System.Drawing.Point(416, 108);
+            this.btnCargar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCargar.Location = new System.Drawing.Point(450, 101);
             this.btnCargar.Name = "btnCargar";
-            this.btnCargar.Size = new System.Drawing.Size(178, 30);
+            this.btnCargar.Size = new System.Drawing.Size(144, 30);
             this.btnCargar.TabIndex = 4;
             this.btnCargar.Text = "Cargar Archivo";
             this.btnCargar.UseVisualStyleBackColor = true;
@@ -128,48 +128,33 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.btnEjecutarEM);
-            this.tabPage2.Controls.Add(this.label1);
-            this.tabPage2.Controls.Add(this.txtNumOrden);
+            this.tabPage2.Controls.Add(this.btnAbrirReporte);
+            this.tabPage2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(696, 340);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Etiqueta Marco";
+            this.tabPage2.Text = "Reporte";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // btnEjecutarEM
+            // btnAbrirReporte
             // 
-            this.btnEjecutarEM.Location = new System.Drawing.Point(216, 87);
-            this.btnEjecutarEM.Name = "btnEjecutarEM";
-            this.btnEjecutarEM.Size = new System.Drawing.Size(95, 23);
-            this.btnEjecutarEM.TabIndex = 2;
-            this.btnEjecutarEM.Text = "Ejecutar";
-            this.btnEjecutarEM.UseVisualStyleBackColor = true;
-            this.btnEjecutarEM.Click += new System.EventHandler(this.btnEjecutarEM_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(24, 93);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(56, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "No. Orden";
-            // 
-            // txtNumOrden
-            // 
-            this.txtNumOrden.Location = new System.Drawing.Point(86, 90);
-            this.txtNumOrden.Name = "txtNumOrden";
-            this.txtNumOrden.Size = new System.Drawing.Size(113, 20);
-            this.txtNumOrden.TabIndex = 0;
+            this.btnAbrirReporte.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAbrirReporte.Location = new System.Drawing.Point(71, 42);
+            this.btnAbrirReporte.Name = "btnAbrirReporte";
+            this.btnAbrirReporte.Size = new System.Drawing.Size(136, 33);
+            this.btnAbrirReporte.TabIndex = 0;
+            this.btnAbrirReporte.Text = "Abrir reporte";
+            this.btnAbrirReporte.UseVisualStyleBackColor = true;
+            this.btnAbrirReporte.Click += new System.EventHandler(this.btnAbrirReporte_Click);
             // 
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.btnEjecutarEH);
             this.tabPage3.Controls.Add(this.label2);
             this.tabPage3.Controls.Add(this.textBox1);
+            this.tabPage3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
@@ -192,7 +177,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(32, 87);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(56, 13);
+            this.label2.Size = new System.Drawing.Size(81, 20);
             this.label2.TabIndex = 4;
             this.label2.Text = "No. Orden";
             // 
@@ -200,7 +185,7 @@
             // 
             this.textBox1.Location = new System.Drawing.Point(94, 84);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(113, 20);
+            this.textBox1.Size = new System.Drawing.Size(113, 26);
             this.textBox1.TabIndex = 3;
             // 
             // tabPage4
@@ -208,6 +193,7 @@
             this.tabPage4.Controls.Add(this.btnEjecutarEO);
             this.tabPage4.Controls.Add(this.label3);
             this.tabPage4.Controls.Add(this.textBox2);
+            this.tabPage4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
@@ -230,7 +216,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(29, 89);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(56, 13);
+            this.label3.Size = new System.Drawing.Size(81, 20);
             this.label3.TabIndex = 7;
             this.label3.Text = "No. Orden";
             // 
@@ -238,13 +224,8 @@
             // 
             this.textBox2.Location = new System.Drawing.Point(91, 86);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(113, 20);
+            this.textBox2.Size = new System.Drawing.Size(113, 26);
             this.textBox2.TabIndex = 6;
-            // 
-            // dataSet11
-            // 
-            this.dataSet11.DataSetName = "DataSet1";
-            this.dataSet11.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // frmEtiquetas
             // 
@@ -260,12 +241,10 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataSet11)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -287,10 +266,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.Button btnEjecutarEM;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtNumOrden;
-        private DataSet1 dataSet11;
+        private System.Windows.Forms.Button btnAbrirReporte;
     }
 }
 

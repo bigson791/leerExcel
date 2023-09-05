@@ -1,15 +1,18 @@
-﻿using MySql.Data.MySqlClient;
+﻿using DocumentFormat.OpenXml.Office.Word;
+using MySql.Data.MySqlClient;
 using SpreadsheetLight;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 
 namespace LeerExcel
 {
@@ -37,9 +40,10 @@ namespace LeerExcel
                 SLDocument sl = new SLDocument(@ruta);
                 SLWorksheetStatistics propiedades = sl.GetWorksheetStatistics();
 
-                int ultimaFila = propiedades.EndRowIndex;
+                int ultimaFila = propiedades.EndRowIndex+1;
 
                 MySqlConnection conexionDB = Conexion.conexion();
+#pragma warning disable CS0168 // La variable está declarada pero nunca se usa
                 try
                 {
                     conexionDB.Open();
@@ -48,12 +52,11 @@ namespace LeerExcel
                 {
                     MessageBox.Show("Error al conectar con la base de datos");
                 }
-                finally
-                {
-                    conexionDB.Close();
-                }
+#pragma warning restore CS0168 // La variable está declarada pero nunca se usa
 
+#pragma warning disable CS0219 // La variable está asignada pero nunca se usa su valor
                 string error = "";
+#pragma warning restore CS0219 // La variable está asignada pero nunca se usa su valor
                 string cliente = sl.GetCellValueAsString("A" + 1);
                 string no_orden = sl.GetCellValueAsString("B" + 1);
                 string no_ventana = sl.GetCellValueAsString("C" + 1);
@@ -80,6 +83,7 @@ namespace LeerExcel
                         "@POSICION, @ID_VENTANA)";
                         try
                         {
+                          
                             MySqlCommand comando = new MySqlCommand(sql, conexionDB);
                             comando.Parameters.AddWithValue("@CLIENTE", sl.GetCellValueAsString("A" + x));
                             comando.Parameters.AddWithValue("@NO_ORDEN", sl.GetCellValueAsString("B" + x));
@@ -104,7 +108,15 @@ namespace LeerExcel
 
         private bool existeOrden(string no_orden) {
             MySqlConnection conexionDB = Conexion.conexion();
-            conexionDB.Open();
+            try
+            {
+                conexionDB.Open();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al conectar con la base de datos");
+            }
+
             string sql = "SELECT COUNT(NO_ORDEN) FROM ordenes WHERE NO_ORDEN = '" + no_orden + "'";
             MySqlCommand comando = new MySqlCommand(sql, conexionDB);
 
@@ -144,22 +156,15 @@ namespace LeerExcel
             }
         }
 
-        private void btnEjecutarEM_Click(object sender, EventArgs e)
+        private void lblRuta_Click(object sender, EventArgs e)
         {
-            String numeroOrden = txtNumOrden.Text.ToUpper();
-            if (numeroOrden == "")
-            {
-                MessageBox.Show("Ingresa un número de orden");
-            }
-            else {
-                MessageBox.Show("Este es el numero de orden: " + numeroOrden);
-                this.dataSet11.Clear();
-                using (MemoryStream ms = new MemoryStream()) { 
-                
-                
-                }
-            }
-            
+
+        }
+
+        private void btnAbrirReporte_Click(object sender, EventArgs e)
+        {
+            ReporteHoja rh = new ReporteHoja();
+            rh.Show();
         }
     }
 }

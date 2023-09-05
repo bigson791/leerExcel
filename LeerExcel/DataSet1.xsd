@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DataSet1" targetNamespace="http://tempuri.org/DataSet1.xsd" xmlns:mstns="http://tempuri.org/DataSet1.xsd" xmlns="http://tempuri.org/DataSet1.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="ConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="ConnectionString (Settings)" PropertyReference="ApplicationSettings.LeerExcel.Properties.Settings.GlobalReference.Default.ConnectionString" Provider="System.Data.Odbc" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="DataTableTableAdapter" GeneratorDataComponentClassName="DataTableTableAdapter" Name="DataTable" UserDataComponentName="DataTableTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="ConnectionString (Settings)" DbObjectName="" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="getHojasVentana" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="getHojasVentana" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="getHojasVentana">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>WITH OrderedData AS (SELECT   CLIENTE, NO_ORDEN, NO_VENTANA,DESCRIPCION_ARTICULO, NO_CORTE, MEDIDA, POSICION, ID_VENTANA, ROW_NUMBER() OVER(ORDER BY ID_VENTANA) AS row_num, COUNT(*) OVER(PARTITION BY POSICION) 
+AS position_count
+FROM      ordenes
+WHERE   NO_ORDEN = 'A2352-1' AND DESCRIPCION_ARTICULO LIKE '%hoja%'), PositionedData AS
+    (SELECT   CLIENTE, NO_ORDEN, NO_VENTANA,DESCRIPCION_ARTICULO, NO_CORTE, MEDIDA, POSICION, ID_VENTANA, row_num, position_count, 
+                     CASE WHEN POSICION = 'Horizontal inferior' THEN 1 WHEN POSICION = 'Horizontal superior' THEN 2 WHEN POSICION = 'Vertical izquierda' THEN 3 WHEN POSICION = 'Vertical derecha' THEN 4 ELSE 5 END AS posicion_order
+     FROM      OrderedData), GroupedData AS
+    (SELECT   CLIENTE, NO_ORDEN, NO_VENTANA, DESCRIPCION_ARTICULO, NO_CORTE, MEDIDA, POSICION, ID_VENTANA, row_num, position_count, posicion_order, FLOOR((row_num - 1) / (4 * position_count)) AS group_num
+     FROM      PositionedData), GroupsWithPositionOrder AS
+    (SELECT   CLIENTE, NO_ORDEN, NO_VENTANA, DESCRIPCION_ARTICULO, NO_CORTE, MEDIDA, POSICION, ID_VENTANA, row_num, position_count, posicion_order, group_num, ROW_NUMBER() OVER(PARTITION BY POSICION, group_num
+     ORDER BY ID_VENTANA) AS row_num_in_group
+FROM      GroupedData)
+    SELECT   CLIENTE, NO_ORDEN,NO_VENTANA, DESCRIPCION_ARTICULO, NO_CORTE, MEDIDA, POSICION, ID_VENTANA
+    FROM      GroupsWithPositionOrder
+    ORDER BY group_num, row_num_in_group, posicion_order, ID_VENTANA, DESCRIPCION_ARTICULO;</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="CLIENTE" DataSetColumn="CLIENTE" />
+              <Mapping SourceColumn="NO_ORDEN" DataSetColumn="NO_ORDEN" />
+              <Mapping SourceColumn="NO_VENTANA" DataSetColumn="NO_VENTANA" />
+              <Mapping SourceColumn="DESCRIPCION_ARTICULO" DataSetColumn="DESCRIPCION_ARTICULO" />
+              <Mapping SourceColumn="NO_CORTE" DataSetColumn="NO_CORTE" />
+              <Mapping SourceColumn="MEDIDA" DataSetColumn="MEDIDA" />
+              <Mapping SourceColumn="POSICION" DataSetColumn="POSICION" />
+              <Mapping SourceColumn="ID_VENTANA" DataSetColumn="ID_VENTANA" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DataSet1" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="DataSet1" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DataSet1">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DataTable" msprop:Generator_RowClassName="DataTableRow" msprop:Generator_RowEvHandlerName="DataTableRowChangeEventHandler" msprop:Generator_RowDeletedName="DataTableRowDeleted" msprop:Generator_RowDeletingName="DataTableRowDeleting" msprop:Generator_RowEvArgName="DataTableRowChangeEvent" msprop:Generator_TablePropName="DataTable" msprop:Generator_RowChangedName="DataTableRowChanged" msprop:Generator_UserTableName="DataTable" msprop:Generator_RowChangingName="DataTableRowChanging" msprop:Generator_TableClassName="DataTableDataTable" msprop:Generator_TableVarName="tableDataTable">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="CLIENTE" msprop:Generator_ColumnPropNameInTable="CLIENTEColumn" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="CLIENTE" msprop:Generator_UserColumnName="CLIENTE" msprop:Generator_ColumnVarNameInTable="columnCLIENTE">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="150" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NO_ORDEN" msprop:Generator_ColumnPropNameInTable="NO_ORDENColumn" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="NO_ORDEN" msprop:Generator_UserColumnName="NO_ORDEN" msprop:Generator_ColumnVarNameInTable="columnNO_ORDEN">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="75" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NO_VENTANA" msprop:Generator_ColumnPropNameInTable="NO_VENTANAColumn" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="NO_VENTANA" msprop:Generator_UserColumnName="NO_VENTANA" msprop:Generator_ColumnVarNameInTable="columnNO_VENTANA">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="75" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DESCRIPCION_ARTICULO" msprop:Generator_ColumnPropNameInTable="DESCRIPCION_ARTICULOColumn" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="DESCRIPCION_ARTICULO" msprop:Generator_UserColumnName="DESCRIPCION_ARTICULO" msprop:Generator_ColumnVarNameInTable="columnDESCRIPCION_ARTICULO">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="225" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NO_CORTE" msprop:Generator_ColumnPropNameInTable="NO_CORTEColumn" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="NO_CORTE" msprop:Generator_UserColumnName="NO_CORTE" msprop:Generator_ColumnVarNameInTable="columnNO_CORTE">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="22" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="MEDIDA" msprop:Generator_ColumnPropNameInTable="MEDIDAColumn" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="MEDIDA" msprop:Generator_UserColumnName="MEDIDA" msprop:Generator_ColumnVarNameInTable="columnMEDIDA">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="150" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="POSICION" msprop:Generator_ColumnPropNameInTable="POSICIONColumn" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="POSICION" msprop:Generator_UserColumnName="POSICION" msprop:Generator_ColumnVarNameInTable="columnPOSICION">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="150" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ID_VENTANA" msprop:Generator_ColumnPropNameInTable="ID_VENTANAColumn" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="ID_VENTANA" msprop:Generator_UserColumnName="ID_VENTANA" msprop:Generator_ColumnVarNameInTable="columnID_VENTANA">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="37" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
